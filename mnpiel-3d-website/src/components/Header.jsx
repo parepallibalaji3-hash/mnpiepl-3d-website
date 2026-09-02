@@ -33,11 +33,14 @@ export default function Header({ activeSection, onNavigate }) {
       <div className={styles.container}>
         {/* Logo */}
         <a href="#hero" className={styles.logoContainer} onClick={(e) => { e.preventDefault(); handleNavClick('hero'); }}>
-          <div className={styles.logoText}>
-            MNPIEPL<span className={styles.logoDot}>.</span>
-          </div>
-          <div className={styles.logoSubText}>
-            MULLETI'S & PUSULURI'S INFRACON
+          <img src="/logo.png" alt="MNPIEPL Logo" className={styles.headerLogoImg} />
+          <div className={styles.logoTextWrapper}>
+            <div className={styles.logoText}>
+              MNPIEPL<span className={styles.logoDot}>.</span>
+            </div>
+            <div className={styles.logoSubText}>
+              MULLETI'S & PUSULURI'S INFRACON
+            </div>
           </div>
         </a>
 

@@ -10,39 +10,10 @@ import ThreeCanvas from './components/ThreeCanvas';
 function App() {
   const [activeSection, setActiveSection] = useState('hero');
   const [activeService, setActiveService] = useState('survey');
-  const [loading, setLoading] = useState(true);
-  const [loadingProgress, setLoadingProgress] = useState(0);
-
-  // Simulated premium asset loading progress
-  useEffect(() => {
-    const duration = 1200; // ms
-    const intervalTime = 30; // ms
-    const steps = duration / intervalTime;
-    let currentStep = 0;
-
-    const timer = setInterval(() => {
-      currentStep++;
-      const progress = Math.min(100, Math.floor((currentStep / steps) * 100));
-      setLoadingProgress(progress);
-
-      if (progress >= 100) {
-        clearInterval(timer);
-        // Add a tiny delay for visual satisfaction
-        setTimeout(() => {
-          setLoading(false);
-        }, 300);
-      }
-    }, intervalTime);
-
-    return () => clearInterval(timer);
-  }, []);
 
   // IntersectionObserver to auto-update active navigation link during scrolling
   useEffect(() => {
-    if (loading) return;
-
     const sections = ['hero', 'services', 'about', 'projects', 'contact'];
-    const observers = [];
 
     const observerCallback = (entries) => {
       entries.forEach((entry) => {
@@ -71,7 +42,7 @@ function App() {
         if (el) observer.unobserve(el);
       });
     };
-  }, [loading]);
+  }, []);
 
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
@@ -84,26 +55,11 @@ function App() {
 
   return (
     <>
-      {/* Loading Screen */}
-      {loading && (
-        <div className="loading-screen">
-          <div className="spinner" />
-          <h2 style={{ fontFamily: 'var(--font-heading)', marginTop: '2rem', fontSize: '1.2rem', color: 'var(--primary)', letterSpacing: '2px' }}>
-            LOADING DGPS ENGINE
-          </h2>
-          <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.5rem', fontFamily: 'monospace' }}>
-            INITIALIZING CONTOURS... {loadingProgress}%
-          </div>
-        </div>
-      )}
-
       {/* Fixed 3D canvas backdrop */}
-      {!loading && (
-        <ThreeCanvas 
-          activeSection={activeSection} 
-          activeService={activeService} 
-        />
-      )}
+      <ThreeCanvas 
+        activeSection={activeSection} 
+        activeService={activeService} 
+      />
 
       {/* Scrolled text sections overlay */}
       <div className="sections-overlay">
@@ -126,7 +82,7 @@ function App() {
           <About />
 
           {/* Sectors layout grid */}
-          <Projects />
+          <Projects onNavigate={scrollToSection} />
 
           {/* Contact form */}
           <Contact />

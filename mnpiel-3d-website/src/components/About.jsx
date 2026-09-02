@@ -41,26 +41,6 @@ export default function About() {
       name: 'Mr. Pusuluri Pulla Rao',
       role: 'Co-Founder & Director',
       isFounder: true
-    },
-    {
-      name: 'Survey Lead',
-      role: 'Chief Land Surveyor',
-      isFounder: false
-    },
-    {
-      name: 'Drone Unit',
-      role: 'UAV Pilot & Photogrammetrist',
-      isFounder: false
-    },
-    {
-      name: 'Geo Team',
-      role: 'Geotechnical Specialist',
-      isFounder: false
-    },
-    {
-      name: 'Design Cell',
-      role: 'Structural & Civil Designer',
-      isFounder: false
     }
   ];
 
@@ -105,11 +85,11 @@ export default function About() {
 
         {/* Leadership Grid */}
         <div>
-          <h3 className={styles.teamTitle}>Our Leadership & Specialists</h3>
+          <h3 className={styles.teamTitle}>Our Leadership</h3>
           <div className={styles.teamGrid}>
             {team.map((member, idx) => (
               <div key={idx} className={styles.teamCard}>
-                <div className={`${styles.avatar} ${member.isFounder ? styles.coFounderAvatar : ''}`}>
+                <div className={`${styles.avatar} ${styles.coFounderAvatar}`}>
                   <User size={36} />
                 </div>
                 <div className={styles.memberName}>{member.name}</div>

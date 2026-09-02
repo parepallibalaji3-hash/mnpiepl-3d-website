@@ -188,8 +188,10 @@ input,
 select,
 textarea,
 button,
-a {
-  pointer-events: auto;
+a,
+div[class*="modalOverlay"],
+div[class*="modalContent"] {
+  pointer-events: auto !important;
 }
 
 .section {
